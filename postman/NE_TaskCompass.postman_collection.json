@@ -1,0 +1,413 @@
+{
+  "info": {
+    "name": "NE TaskCompass APIs",
+    "description": "REST methods for the NE TaskCompass field app and NE LiveTrack portal.\n\nAuthenticate with session cookies (login) or header: Authorization: token <api_key>:<api_secret>.\n\nRoles: TC Salesperson (field APIs), TC Sales Manager (own territory), TC Management (all regions, no doctor delete), TC Super Admin (everything).\nA Sales Manager only sees their city. Management and Super Admin see all regions.\nFollow ups and tenders: any logged-in role can create and update (salesperson = own records). Reassign follow up and delete tender stay management-only.\nPortal Users APIs list only users flagged LiveTrack portal only on the User form in ERP. Creating a user from the portal assigns the selected role and turns that flag on.\n\nDay plan → visit: save_plan creates a TC Visit per row (salesperson, doctor, hospital, product, day_plan). Check-in sets In Progress; check-out sets Done. The day plan row status follows the visit. When every row is Done the plan is Closed.\nPending and Missed rows can be edited and sync to the visit. After check-in the row is locked (locked=true on list/get). A Field Day needs at least 2 HOD and 2 Professor. There is no six-visit minimum or cap. OT Full Day and OT Half Day skip that mix.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://site1.local:8000" },
+    { "key": "api_key", "value": "" },
+    { "key": "api_secret", "value": "" }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "token {{api_key}}:{{api_secret}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"usr\": \"manager@example.com\",\n  \"pwd\": \"password\"\n}" },
+            "url": "{{base_url}}/api/method/login"
+          }
+        },
+        {
+          "name": "Me",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.auth.me" }
+        },
+        {
+          "name": "Generate API keys",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.auth.generate_keys" }
+        },
+        {
+          "name": "Logout",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.auth.logout" }
+        }
+      ]
+    },
+    {
+      "name": "Users (portal)",
+      "item": [
+        {
+          "name": "List roles",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.users.list_roles" }
+        },
+        {
+          "name": "List portal users",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.users.list_portal_users" }
+        },
+        {
+          "name": "Create portal user",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"rep@example.com\",\n  \"first_name\": \"Ali\",\n  \"last_name\": \"Raza\",\n  \"password\": \"ChangeMe123\",\n  \"role\": \"TC Salesperson\",\n  \"territory\": \"Lahore\"\n}"
+            },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.users.create_portal_user",
+            "description": "Role must be one of: TC Salesperson, TC Sales Manager, TC Management, TC Super Admin. Salesperson and Sales Manager need territory (city). Employee + Sales Person are created for those two roles. LiveTrack portal only is turned on automatically (ERP User form only)."
+          }
+        },
+        {
+          "name": "Update portal user",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"rep@example.com\",\n  \"first_name\": \"Ali\",\n  \"last_name\": \"Raza\",\n  \"role\": \"TC Salesperson\",\n  \"territory\": \"Lahore\",\n  \"enabled\": 1\n}"
+            },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.users.update_portal_user"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Setup",
+      "item": [
+        {
+          "name": "List territories",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.list_territories" }
+        },
+        {
+          "name": "Create territory",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"territory_name\": \"Peshawar\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.create_territory"
+          }
+        },
+        {
+          "name": "Create sales person",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"sales_person_name\": \"Ali Raza\",\n  \"territory\": \"Lahore\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.create_sales_person"
+          }
+        },
+        {
+          "name": "List designations",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.list_designations",
+            "description": "TC Designation master used by sample orders. A fresh install loads Professor, Associate Professor, Assistant Professor, Consultant Surgeon, and Other from the app fixture."
+          }
+        },
+        {
+          "name": "Create designation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"designation_name\": \"Senior Registrar\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.create_designation",
+            "description": "Adds a designation the portal can pick on a sample order. The name is the document id."
+          }
+        },
+        {
+          "name": "Get settings",
+          "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.get_settings" }
+        },
+        {
+          "name": "Save settings",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"gps_check_meters\": 200,\n  \"score_floor\": 30,\n  \"weeks_per_month\": 4,\n  \"tracker_start_time\": \"08:00:00\",\n  \"tracker_end_time\": \"18:00:00\",\n  \"location_interval\": \"00:15:00\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.setup.save_settings"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Directory",
+      "item": [
+        { "name": "List sales persons", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.list_sales_persons" } },
+        { "name": "List products", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.list_products" } },
+        {
+          "name": "Create product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"product_name\": \"Stypcel\",\n  \"category\": \"Haemostats\",\n  \"monthly_target\": 700,\n  \"unit_price\": 0\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.create_product"
+          }
+        },
+        { "name": "List hospitals", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"territory\": \"Lahore\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.list_hospitals" } },
+        {
+          "name": "Create hospital",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"hospital_name\": \"Jinnah Hospital Lahore\",\n  \"city\": \"Lahore\",\n  \"territory\": \"Lahore\",\n  \"address\": \"Faisal Town\",\n  \"latitude\": 31.484,\n  \"longitude\": 74.294\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.create_hospital"
+          }
+        },
+        {
+          "name": "Update hospital",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Jinnah Hospital Lahore\",\n  \"city\": \"Lahore\",\n  \"address\": \"Faisal Town\",\n  \"latitude\": 31.484,\n  \"longitude\": 74.294\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.update_hospital"
+          }
+        },
+        { "name": "List doctors", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"Approved\",\n  \"search\": \"\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.list_doctors" } },
+        { "name": "Get doctor", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-DR-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.get_doctor" } },
+        { "name": "Create doctor (pending)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor_name\": \"Prof. Example\",\n  \"person_type\": \"Professor\",\n  \"hospital\": \"Shifa International Hospital\",\n  \"city\": \"Islamabad\",\n  \"phone\": \"+92 300 0000000\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.create_doctor", "description": "person_type is HOD, Professor, OT Incharge, Other, or Unclassified. When person_type is Other, person_type_other is required." } },
+        { "name": "Create doctor (Other person type)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor_name\": \"Dr. Example\",\n  \"person_type\": \"Other\",\n  \"person_type_other\": \"Senior Registrar\",\n  \"hospital\": \"Shifa International Hospital\",\n  \"city\": \"Islamabad\",\n  \"phone\": \"+92 300 0000000\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.create_doctor", "description": "Use this when none of HOD, Professor, or OT Incharge apply. person_type_other is stored only while person_type is Other." } },
+        {
+          "name": "Update doctor",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-DR-00001\",\n  \"person_type\": \"Other\",\n  \"person_type_other\": \"Senior Registrar\",\n  \"phone\": \"+92 300 1111111\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.update_doctor"
+          }
+        },
+        { "name": "Eligible products", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.eligible_products" } },
+        { "name": "List schedules", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.list_schedules" } },
+        {
+          "name": "Upsert OPD timing",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"hospital\": \"Shifa International Hospital\",\n  \"day_of_week\": \"Mon\",\n  \"start_time\": \"09:00\",\n  \"end_time\": \"13:00\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.upsert_schedule",
+            "description": "Hospital must belong to the selected doctor. Times are HH:MM. Duplicate: same doctor + hospital + day + start + end is rejected. Extra slots at the same hospital are allowed if the times differ."
+          }
+        },
+        {
+          "name": "Delete OPD timing",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-SCH-00001\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.delete_schedule"
+          }
+        },
+        { "name": "Submit edit request", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"changes\": {\n    \"person_type\": { \"from\": \"Professor\", \"to\": \"Other\" },\n    \"person_type_other\": { \"from\": \"\", \"to\": \"Senior Registrar\" },\n    \"phone\": { \"from\": \"\", \"to\": \"+92 300 1111111\" }\n  },\n  \"reason\": \"Corrected at OPD\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.directory.submit_edit_request", "description": "Allowed fields include person_type and person_type_other. Each change is { from, to }." } }
+      ]
+    },
+    {
+      "name": "Plans",
+      "item": [
+        {
+          "name": "List plans",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"limit\": 200\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.list_plans",
+            "description": "Each plan includes items: doctor, hospital, product, visit_time, status, visit, locked. locked is true after check-in (In Progress / Done / Rescheduled)."
+          }
+        },
+        { "name": "Get plan", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-PLAN-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.get_plan", "description": "Pass name, or plan_date + salesperson." } },
+        {
+          "name": "Save plan",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TC-PLAN-00001\",\n  \"salesperson\": \"Ali Raza\",\n  \"plan_date\": \"2026-09-01\",\n  \"day_type\": \"Field Day\",\n  \"remarks\": \"\",\n  \"items\": [\n    { \"name\": \"a840dc4362\", \"doctor\": \"TC-DR-00001\", \"hospital\": \"Jinnah Hospital Lahore\", \"product\": \"Stypcel\", \"visit_time\": \"09:00\" },\n    { \"doctor\": \"TC-DR-00002\", \"hospital\": \"Jinnah Hospital Lahore\", \"product\": \"Stypcel\" },\n    { \"doctor\": \"TC-DR-00003\", \"hospital\": \"Jinnah Hospital Lahore\", \"product\": \"Stypcel\" },\n    { \"doctor\": \"TC-DR-00004\", \"hospital\": \"Jinnah Hospital Lahore\", \"product\": \"Stypcel\" }\n  ]\n}"
+            },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.save_plan",
+            "description": "Pass name to update an existing plan. Include each existing item's name so locked In Progress/Done/Rescheduled rows are kept. Pending and Missed row changes sync to the linked TC Visit. A Field Day needs at least one visit, including at least 2 HOD and 2 Professor. There is no six-visit minimum or cap. OT Full Day and OT Half Day skip that mix."
+          }
+        },
+        { "name": "Delete plan", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-PLAN-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.delete_plan", "description": "Blocked if any visit is In Progress, Done or Rescheduled." } },
+        { "name": "OPD start time", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"hospital\": \"Jinnah Hospital Lahore\",\n  \"plan_date\": \"2026-09-01\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.opd_start_time", "description": "Returns HH:MM from TC Doctor Schedule start time for this doctor + hospital (prefers that weekday)." } },
+        { "name": "End of day", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"plan_date\": \"2026-08-26\",\n  \"salesperson\": \"Ali Raza\",\n  \"rescheduled\": []\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.plans.end_of_day", "description": "Marks leftover rows Missed (or Rescheduled if listed), copies status onto the visits, and closes the day plan." } }
+      ]
+    },
+    {
+      "name": "Visits",
+      "item": [
+        { "name": "List visits", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.list_visits", "description": "Optional filters: doctor, product, salesperson. Includes status, hospital, day_plan, day_plan_item, check-in/out, gps_ok, locked." } },
+        { "name": "Get visit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-VST-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.get_visit" } },
+        {
+          "name": "Update visit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-VST-00001\",\n  \"doctor\": \"TC-DR-00001\",\n  \"hospital\": \"Jinnah Hospital Lahore\",\n  \"product\": \"Stypcel\",\n  \"notes\": \"Introduced product\",\n  \"showed_brochure\": 1,\n  \"did_demonstration\": 0,\n  \"outcome\": \"\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.update_visit",
+            "description": "Pending and Missed: doctor, hospital and product can change and are copied onto the day plan row. In Progress / Done / Rescheduled: only notes, brochure, demo and outcome."
+          }
+        },
+        { "name": "Next visit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.next_visit" } },
+        { "name": "Log visit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\",\n  \"showed_brochure\": 1,\n  \"did_demonstration\": 0,\n  \"outcome\": \"\",\n  \"notes\": \"Introduced product\",\n  \"checkin_time\": \"2026-09-01 09:05:00\",\n  \"checkin_latitude\": 33.66,\n  \"checkin_longitude\": 73.06,\n  \"person_type\": \"Professor\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.log_visit" } },
+        {
+          "name": "Check in",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-VST-00001\",\n  \"day_plan\": \"TC-PLAN-00001\",\n  \"day_plan_item\": \"a840dc4362\",\n  \"doctor\": \"TC-DR-00001\",\n  \"hospital\": \"Jinnah Hospital Lahore\",\n  \"product\": \"Stypcel\",\n  \"checkin_time\": \"2026-09-01 09:05:00\",\n  \"checkin_latitude\": 31.4845,\n  \"checkin_longitude\": 74.2962\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.checkin",
+            "description": "Pass name of the visit created from the day plan (or day_plan_item). Sets status to In Progress, stores check-in time + lat/lng, and copies status onto the day plan row. GPS must be within TC Settings gps_check_meters of the hospital pin when the hospital has coordinates."
+          }
+        },
+        {
+          "name": "Check out",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-VST-00001\",\n  \"checkout_time\": \"2026-09-01 09:40:00\",\n  \"checkout_latitude\": 33.66,\n  \"checkout_longitude\": 73.06\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.checkout",
+            "description": "Requires a prior check-in. Sets status to Done, copies it to the day plan row, and closes the day plan when every row is Done."
+          }
+        },
+        {
+          "name": "Attach visit image",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-VST-00001\",\n  \"filename\": \"opd.jpg\",\n  \"content\": \"BASE64_HERE\",\n  \"caption\": \"OPD board\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.visits.attach_image",
+            "description": "content is base64 (data URL prefix allowed). Or pass file_url from /api/method/upload_file."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Samples",
+      "item": [
+        { "name": "List samples", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.samples.list_samples" } },
+        { "name": "Sample warning", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.samples.sample_warning" } },
+        { "name": "Create sample order", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\",\n  \"designation\": \"Professor\",\n  \"hospital_name\": \"Shifa International Hospital\",\n  \"department\": \"Neurosurgery\",\n  \"related_surgeries_pm\": 8,\n  \"total_surgeries_pm\": 20,\n  \"expected_consumption_pm\": 12\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.samples.create_sample", "description": "designation is a TC Designation name, for example Professor, Associate Professor, Assistant Professor, Consultant Surgeon, Other, or one added under Setup." } },
+        { "name": "Attach review", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-SMP-00001\",\n  \"review_text\": \"Worked well\",\n  \"interest_level\": \"High\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.samples.attach_review" } }
+      ]
+    },
+    {
+      "name": "Follow ups",
+      "item": [
+        { "name": "List follow ups", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.list_followups" } },
+        { "name": "Assign follow up", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\",\n  \"competitor_name\": \"Floseal\",\n  \"target_share\": 60,\n  \"reason\": \"Already using a competitor haemostat\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.assign_followup", "description": "Any logged-in TaskCompass role (including TC Salesperson) can create a follow up. Salespersons are assigned to themselves. Pass name to update an existing assignment (competitor, reason, status, dates)." } },
+        { "name": "Update follow up", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-FU-00001\",\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\",\n  \"competitor_name\": \"Floseal\",\n  \"target_share\": 70,\n  \"reason\": \"Volume moving, keep visiting\",\n  \"status\": \"Active\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.assign_followup", "description": "Same method as Assign follow up. Pass name to edit. Salespersons may update their own assignments." } },
+        {
+          "name": "Set follow up status",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-FU-00001\",\n  \"status\": \"Active\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.set_followup_status",
+            "description": "Active, Paused or Closed. Salespersons may change status on follow ups assigned to them."
+          }
+        },
+        {
+          "name": "Reassign follow up",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-FU-00001\",\n  \"assigned_to\": \"Ali Raza\"\n}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.reassign_followup",
+            "description": "Move a follow up to another salesperson. Management / Sales Manager only."
+          }
+        },
+        { "name": "Log follow up visit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"doctor\": \"TC-DR-00001\",\n  \"product\": \"Stypcel\",\n  \"our_units\": 12,\n  \"blocker\": \"Habit\",\n  \"notes\": \"Agreed to trial more cases\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.followups.log_followup_visit", "description": "our_units and blocker are required. Competitor units are not collected." } }
+      ]
+    },
+    {
+      "name": "Approvals",
+      "item": [
+        { "name": "Pending queue", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.approvals.pending" } },
+        { "name": "Decide doctor", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-DR-00001\",\n  \"action\": \"Approved\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.approvals.decide_doctor" } },
+        { "name": "Decide edit", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-ED-00001\",\n  \"action\": \"Approved\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.approvals.decide_edit" } },
+        { "name": "Decide sample", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-SMP-00001\",\n  \"action\": \"Approved\",\n  \"confirm_additional\": 1\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.samples.decide_sample" } }
+      ]
+    },
+    {
+      "name": "Targets",
+      "item": [
+        { "name": "List targets", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.targets.list_targets" } },
+        { "name": "Set monthly targets", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"salesperson\": \"Mr. Shoaib\",\n  \"year\": 2026,\n  \"month\": 8,\n  \"lines\": [{ \"product\": \"Stypcel\", \"target_qty\": 700 }]\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.targets.set_monthly_targets" } },
+        { "name": "Set weekly achieved", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"salesperson\": \"Mr. Shoaib\",\n  \"year\": 2026,\n  \"month\": 8,\n  \"week_of_month\": 1,\n  \"lines\": [{ \"product\": \"Stypcel\", \"achieved_qty\": 140 }]\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.targets.set_weekly_achieved" } },
+        { "name": "My score", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.targets.my_score" } }
+      ]
+    },
+    {
+      "name": "Tenders / Pipeline / Performance",
+      "item": [
+        { "name": "List tenders", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.tenders.list_tenders", "description": "Stages are Identified, Submitted, Won, Lost, Closed. Each row includes po_number, po_date, and supporting_file_url. Tender amount is not returned." } },
+        { "name": "Get tender", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-TND-00001\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.tenders.get_tender", "description": "Full tender, including supporting_file_url for the PO or challan. Amount is not returned." } },
+        { "name": "Save tender", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"PIMS haemostat tender\",\n  \"hospital\": \"Pakistan Institute of Medical Sciences (PIMS)\",\n  \"stage\": \"Identified\",\n  \"po_number\": \"PO-2026-0142\",\n  \"po_date\": \"2026-10-11\",\n  \"supporting_document\": \"/private/files/po.jpg\",\n  \"items\": [{ \"product\": \"Stypcel\", \"qty\": 200 }]\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.tenders.save_tender", "description": "Any logged-in TaskCompass role (including TC Salesperson) can create or update. po_number and po_date are required. stage is Identified, Submitted, Won, Lost, or Closed. A Won tender stays open until someone sets Closed after the order is finished. supporting_document is the file URL from /api/method/upload_file (doctype TC Tender, fieldname supporting_document). Omit items on an update to leave product lines unchanged. Do not send an amount." } },
+        { "name": "Update tender", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"TC-TND-00001\",\n  \"title\": \"PIMS haemostat tender\",\n  \"stage\": \"Won\",\n  \"po_number\": \"PO-2026-0142\",\n  \"po_date\": \"2026-10-11\",\n  \"notes\": \"Order received. Close manually when the order is finished.\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.tenders.save_tender", "description": "Same method as Save tender. Pass name. po_number and po_date stay required. Salespersons may update tenders they lead. Set stage to Closed only when the order is finished." } },
+        { "name": "Tender supporting document", "request": { "method": "GET", "url": "{{base_url}}/api/method/ne_taskcompass.api.tenders.tender_file?name=TC-TND-00001", "description": "Returns the PO or challan file for anyone who can read that tender. Use this instead of /private/files/..." } },
+        { "name": "Pipeline", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.pipeline.get_pipeline" } },
+        { "name": "Team scores", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.performance.team_scores" } },
+        { "name": "Overview KPIs", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.performance.overview" } },
+        { "name": "Add performance event", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"salesperson\": \"Mr. Shoaib\",\n  \"kind\": \"missed_visit\",\n  \"points\": -5,\n  \"note\": \"Did not complete day plan\"\n}" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.performance.add_event" } }
+      ]
+    },
+    {
+      "name": "Tracker",
+      "item": [
+        {
+          "name": "Post location",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 31.5204,\n  \"longitude\": 74.3587,\n  \"tracked_at\": \"2026-08-31 09:15:00\"\n}"
+            },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.tracker.post_location",
+            "description": "Field app posts the logged-in salesperson GPS. Only accepted between TC Settings tracker start and end time. Read interval from get_settings: location_interval / location_interval_minutes."
+          }
+        },
+        {
+          "name": "Latest locations today",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.tracker.latest_locations",
+            "description": "Last TC Sales Person Tracker ping today for each salesperson the caller can see. Used by the LiveTrack dashboard map."
+          }
+        },
+        {
+          "name": "List locations",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"salesperson\": \"Ali Raza\",\n  \"from_datetime\": \"2026-08-31 08:00:00\",\n  \"to_datetime\": \"2026-08-31 18:00:00\",\n  \"limit\": 200\n}"
+            },
+            "url": "{{base_url}}/api/method/ne_taskcompass.api.tracker.list_locations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        { "name": "List", "request": { "method": "POST", "url": "{{base_url}}/api/method/ne_taskcompass.api.notifications.list_notifications" } },
+        { "name": "Mark all read", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{ \"all\": 1 }" }, "url": "{{base_url}}/api/method/ne_taskcompass.api.notifications.mark_read" } }
+      ]
+    }
+  ]
+}

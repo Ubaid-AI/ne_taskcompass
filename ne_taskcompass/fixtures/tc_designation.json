@@ -1,0 +1,42 @@
+[
+ {
+  "designation_name": "Professor",
+  "docstatus": 0,
+  "doctype": "TC Designation",
+  "modified": "2026-10-11 16:58:57.499055",
+  "name": "Professor",
+  "sort_order": 1
+ },
+ {
+  "designation_name": "Associate Professor",
+  "docstatus": 0,
+  "doctype": "TC Designation",
+  "modified": "2026-10-11 16:58:57.547647",
+  "name": "Associate Professor",
+  "sort_order": 2
+ },
+ {
+  "designation_name": "Assistant Professor",
+  "docstatus": 0,
+  "doctype": "TC Designation",
+  "modified": "2026-10-11 16:58:57.588553",
+  "name": "Assistant Professor",
+  "sort_order": 3
+ },
+ {
+  "designation_name": "Consultant Surgeon",
+  "docstatus": 0,
+  "doctype": "TC Designation",
+  "modified": "2026-10-11 16:58:57.627935",
+  "name": "Consultant Surgeon",
+  "sort_order": 4
+ },
+ {
+  "designation_name": "Other",
+  "docstatus": 0,
+  "doctype": "TC Designation",
+  "modified": "2026-10-11 16:58:57.667385",
+  "name": "Other",
+  "sort_order": 100
+ }
+]

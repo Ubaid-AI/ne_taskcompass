@@ -1,0 +1,266 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-08-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "doctor",
+  "product",
+  "requested_by",
+  "status",
+  "column_break_who",
+  "doctor_name",
+  "designation",
+  "hospital_name",
+  "department",
+  "volume_section",
+  "related_surgeries_pm",
+  "total_surgeries_pm",
+  "expected_consumption_pm",
+  "relevance_pct",
+  "review_section",
+  "reviewed_by",
+  "reviewed_at",
+  "review_note",
+  "approval_warning",
+  "feedback_section",
+  "review_text",
+  "interest_level",
+  "expected_usage_date",
+  "stamped_document",
+  "sample_key"
+ ],
+ "fields": [
+  {
+   "default": "TC-SMP-.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "TC-SMP-."
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Doctor",
+   "options": "TC Doctor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "TC Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Requested By",
+   "options": "Sales Person",
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nApproved\nRejected\nDelivered",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_who",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "doctor_name",
+   "fieldtype": "Data",
+   "label": "Doctor Name (on form)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Designation",
+   "options": "TC Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hospital_name",
+   "fieldtype": "Data",
+   "label": "Hospital Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "volume_section",
+   "fieldtype": "Section Break",
+   "label": "Theatre Volume"
+  },
+  {
+   "fieldname": "related_surgeries_pm",
+   "fieldtype": "Int",
+   "label": "Related Surgeries / Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_surgeries_pm",
+   "fieldtype": "Int",
+   "label": "Total Surgeries / Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_consumption_pm",
+   "fieldtype": "Int",
+   "label": "Expected Monthly Consumption",
+   "reqd": 1
+  },
+  {
+   "fieldname": "relevance_pct",
+   "fieldtype": "Percent",
+   "label": "Relevance %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "review_section",
+   "fieldtype": "Section Break",
+   "label": "Office Review"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Reviewed By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reviewed_at",
+   "fieldtype": "Datetime",
+   "label": "Reviewed At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "review_note",
+   "fieldtype": "Small Text",
+   "label": "Review Note"
+  },
+  {
+   "fieldname": "approval_warning",
+   "fieldtype": "Small Text",
+   "label": "Approval Warning",
+   "read_only": 1
+  },
+  {
+   "fieldname": "feedback_section",
+   "fieldtype": "Section Break",
+   "label": "Doctor Review"
+  },
+  {
+   "fieldname": "review_text",
+   "fieldtype": "Text",
+   "label": "Review Text"
+  },
+  {
+   "fieldname": "interest_level",
+   "fieldtype": "Select",
+   "label": "Interest Level",
+   "options": "\nHigh\nMedium\nLow"
+  },
+  {
+   "fieldname": "expected_usage_date",
+   "fieldtype": "Date",
+   "label": "Expected Usage Date"
+  },
+  {
+   "fieldname": "stamped_document",
+   "fieldtype": "Attach",
+   "label": "Stamped Review Document"
+  },
+  {
+   "fieldname": "sample_key",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Sample Key",
+   "read_only": 1,
+   "unique": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-11 16:45:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Sample Order",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Sales Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "TC Salesperson",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "doctor_name",
+ "track_changes": 1
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>NE LiveTrack</title>
+		<link rel="icon" href="{{ favicon }}" />
+		<link rel="shortcut icon" href="{{ favicon }}" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="{{ favicon }}" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="/assets/frappe/js/lib/leaflet/leaflet.css" />
+		<link rel="stylesheet" href="/assets/ne_taskcompass/frontend/assets/index.css?v={{ build_version }}" />
+		<style>
+			html, body, #root { height: 100%; margin: 0; }
+			body { background: #f3f7f8; font-family: Inter, system-ui, sans-serif; }
+			.lt-boot { min-height: 100%; display: grid; place-items: center; color: #64748b; font-size: 14px; text-align: center; }
+			.lt-boot img { width: 56px; height: 56px; object-fit: contain; margin-bottom: 12px; }
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<div class="lt-boot">
+				{% if splash_image %}
+				<img src="{{ splash_image }}" alt="" />
+				{% endif %}
+				<div>Loading NE LiveTrack…</div>
+			</div>
+		</div>
+		<script>
+			window.csrf_token = "{{ frappe.session.csrf_token }}";
+			window.tc_brand = {{ brand_json|safe }};
+		</script>
+		<script src="/assets/frappe/js/lib/leaflet/leaflet.js"></script>
+		<script type="module" src="/assets/ne_taskcompass/frontend/assets/index.js?v={{ build_version }}"></script>
+	</body>
+</html>

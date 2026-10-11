@@ -1,0 +1,357 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"hdr1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>NE TaskCompass</b></span>\",\"col\":12}},{\"id\":\"s-lt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LiveTrack\",\"col\":3}},{\"id\":\"s-doc\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Doctors\",\"col\":3}},{\"id\":\"s-hos\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Hospitals\",\"col\":3}},{\"id\":\"s-prd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Products\",\"col\":3}},{\"id\":\"s-plan\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Day Plans\",\"col\":3}},{\"id\":\"s-vis\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Visits\",\"col\":3}},{\"id\":\"s-sam\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sample Orders\",\"col\":3}},{\"id\":\"s-fup\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Follow Ups\",\"col\":3}},{\"id\":\"s-tnd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tenders\",\"col\":3}},{\"id\":\"s-set\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Settings\",\"col\":3}},{\"id\":\"sp1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"hdr2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters &amp; Operations</b></span>\",\"col\":12}},{\"id\":\"c-mst\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"id\":\"c-fld\",\"type\":\"card\",\"data\":{\"card_name\":\"Field Operations\",\"col\":4}},{\"id\":\"c-mgt\",\"type\":\"card\",\"data\":{\"card_name\":\"Management\",\"col\":4}},{\"id\":\"c-set\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"c-erp\",\"type\":\"card\",\"data\":{\"card_name\":\"ERPNext\",\"col\":4}}]",
+ "creation": "2026-08-26 00:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "users",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "NE TaskCompass",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Masters",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Doctors",
+   "link_to": "TC Doctor",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Hospitals",
+   "link_to": "TC Hospital",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Products",
+   "link_to": "TC Product",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Doctor Schedules",
+   "link_to": "TC Doctor Schedule",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Field Operations",
+   "link_count": 6,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Day Plans",
+   "link_to": "TC Day Plan",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Visits",
+   "link_to": "TC Visit",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Person Tracker",
+   "link_to": "TC Sales Person Tracker",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sample Orders",
+   "link_to": "TC Sample Order",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Follow Ups",
+   "link_to": "TC Follow Up",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Doctor Monthly Sales",
+   "link_to": "TC Doctor Monthly Sales",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Management",
+   "link_count": 6,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Monthly Targets",
+   "link_to": "TC Monthly Target",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Weekly Achievement",
+   "link_to": "TC Weekly Achievement",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tenders",
+   "link_to": "TC Tender",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Edit Requests",
+   "link_to": "TC Doctor Edit Request",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Performance Events",
+   "link_to": "TC Performance Event",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Notifications",
+   "link_to": "TC Notification",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "TC Settings",
+   "link_to": "TC Settings",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Designations",
+   "link_to": "TC Designation",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "ERPNext",
+   "link_count": 6,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item",
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Group",
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Person",
+   "link_to": "Sales Person",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employee",
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Territory",
+   "link_to": "Territory",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "User",
+   "link_to": "User",
+   "link_type": "DocType",
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-26 20:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "NE TaskCompass",
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "restrict_to_domain": "",
+ "roles": [
+  {
+   "role": "TC Super Admin"
+  },
+  {
+   "role": "TC Management"
+  },
+  {
+   "role": "TC Sales Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 20.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "label": "LiveTrack",
+   "type": "URL",
+   "url": "/livetrack"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "label": "Doctors",
+   "link_to": "TC Doctor",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "Hospitals",
+   "link_to": "TC Hospital",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "Products",
+   "link_to": "TC Product",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "",
+   "label": "Day Plans",
+   "link_to": "TC Day Plan",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "label": "Visits",
+   "link_to": "TC Visit",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "",
+   "label": "Sample Orders",
+   "link_to": "TC Sample Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "",
+   "label": "Follow Ups",
+   "link_to": "TC Follow Up",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "",
+   "label": "Tenders",
+   "link_to": "TC Tender",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "label": "Settings",
+   "link_to": "TC Settings",
+   "type": "DocType"
+  }
+ ],
+ "title": "NE TaskCompass"
+}

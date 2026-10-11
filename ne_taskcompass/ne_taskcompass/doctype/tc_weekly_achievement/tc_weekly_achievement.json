@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2026-08-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "salesperson",
+  "product",
+  "year",
+  "month",
+  "week_of_month",
+  "column_break_qty",
+  "achieved_qty",
+  "entered_by",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "salesperson",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sales Person",
+   "options": "Sales Person",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "TC Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "in_standard_filter": 1,
+   "label": "Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Int",
+   "in_standard_filter": 1,
+   "label": "Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "week_of_month",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Week Of Month",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_qty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "achieved_qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Achieved Qty",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entered_by",
+   "fieldtype": "Link",
+   "label": "Entered By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note"
+  }
+ ],
+ "links": [],
+ "modified": "2026-08-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Weekly Achievement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Sales Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "TC Salesperson"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

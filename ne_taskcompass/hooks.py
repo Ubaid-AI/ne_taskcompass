@@ -1,215 +1,101 @@
 app_name = "ne_taskcompass"
-app_title = "Ne Taskcompass"
+app_title = "NE TaskCompass"
 app_publisher = "Ubaid Khanzada"
-app_description = "this app is for field force"
+app_description = "Field force automation and CRM for National Enterprises"
 app_email = "ubaidkhanzada8@gmail.com"
 app_license = "MIT"
 
-# Includes in <head>
-# ------------------
+required_apps = ["erpnext"]
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/ne_taskcompass/css/ne_taskcompass.css"
-# app_include_js = "/assets/ne_taskcompass/js/ne_taskcompass.js"
+after_install = "ne_taskcompass.install.after_install"
+after_migrate = "ne_taskcompass.install.after_migrate"
 
-# include js, css files in header of web template
-# web_include_css = "/assets/ne_taskcompass/css/ne_taskcompass.css"
-# web_include_js = "/assets/ne_taskcompass/js/ne_taskcompass.js"
+app_include_css = "/assets/ne_taskcompass/css/ne_taskcompass.css"
 
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "ne_taskcompass/public/scss/website"
+website_route_rules = [
+	{"from_route": "/livetrack/<path:app_path>", "to_route": "livetrack"},
+]
 
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
+on_session_creation = "ne_taskcompass.session.on_session_creation"
+before_request = ["ne_taskcompass.session.before_request"]
+get_website_user_home_page = "ne_taskcompass.session.get_website_user_home_page"
 
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
+permission_query_conditions = {
+	"TC Doctor": "ne_taskcompass.permissions.doctor_query",
+	"TC Visit": "ne_taskcompass.permissions.visit_query",
+	"TC Day Plan": "ne_taskcompass.permissions.day_plan_query",
+	"TC Sample Order": "ne_taskcompass.permissions.sample_query",
+	"TC Follow Up": "ne_taskcompass.permissions.followup_query",
+	"TC Monthly Target": "ne_taskcompass.permissions.monthly_target_query",
+	"TC Weekly Achievement": "ne_taskcompass.permissions.weekly_achievement_query",
+	"TC Doctor Monthly Sales": "ne_taskcompass.permissions.doctor_linked_query",
+	"TC Doctor Edit Request": "ne_taskcompass.permissions.edit_request_query",
+	"TC Performance Event": "ne_taskcompass.permissions.performance_event_query",
+	"TC Tender": "ne_taskcompass.permissions.tender_query",
+	"TC Notification": "ne_taskcompass.permissions.notification_query",
+	"TC Sales Person Tracker": "ne_taskcompass.permissions.sales_person_tracker_query",
+}
 
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+has_permission = {
+	"TC Doctor": "ne_taskcompass.permissions.has_doctor_permission",
+	"TC Visit": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+	"TC Day Plan": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+	"TC Sample Order": "ne_taskcompass.permissions.has_sample_permission",
+	"TC Follow Up": "ne_taskcompass.permissions.has_followup_permission",
+	"TC Monthly Target": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+	"TC Weekly Achievement": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+	"TC Doctor Monthly Sales": "ne_taskcompass.permissions.has_doctor_linked_permission",
+	"TC Doctor Edit Request": "ne_taskcompass.permissions.has_edit_request_permission",
+	"TC Performance Event": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+	"TC Tender": "ne_taskcompass.permissions.has_tender_permission",
+	"TC Notification": "ne_taskcompass.permissions.has_notification_permission",
+	"TC Sales Person Tracker": "ne_taskcompass.permissions.has_salesperson_owned_permission",
+}
 
-# Home Pages
-# ----------
+doc_events = {
+	"TC Doctor": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+		"on_trash": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Visit": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+		"on_trash": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Day Plan": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Sample Order": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Follow Up": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Monthly Target": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Weekly Achievement": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Tender": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Doctor Edit Request": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"TC Performance Event": {
+		"on_update": "ne_taskcompass.realtime.emit_doc_change",
+	},
+	"User": {
+		"on_update": "ne_taskcompass.session.on_user_update",
+	},
+}
 
-# application home page (will override Website Settings)
-# home_page = "login"
+fixtures = [
+	{"dt": "TC Designation"},
+]
 
-# website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
-
-# Generators
-# ----------
-
-# automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "ne_taskcompass.utils.jinja_methods",
-# 	"filters": "ne_taskcompass.utils.jinja_filters"
-# }
-
-# Installation
-# ------------
-
-# before_install = "ne_taskcompass.install.before_install"
-# after_install = "ne_taskcompass.install.after_install"
-
-# Uninstallation
-# ------------
-
-# before_uninstall = "ne_taskcompass.uninstall.before_uninstall"
-# after_uninstall = "ne_taskcompass.uninstall.after_uninstall"
-
-# Integration Setup
-# ------------------
-# To set up dependencies/integrations with other apps
-# Name of the app being installed is passed as an argument
-
-# before_app_install = "ne_taskcompass.utils.before_app_install"
-# after_app_install = "ne_taskcompass.utils.after_app_install"
-
-# Integration Cleanup
-# -------------------
-# To clean up dependencies/integrations with other apps
-# Name of the app being uninstalled is passed as an argument
-
-# before_app_uninstall = "ne_taskcompass.utils.before_app_uninstall"
-# after_app_uninstall = "ne_taskcompass.utils.after_app_uninstall"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "ne_taskcompass.notifications.get_notification_config"
-
-# Permissions
-# -----------
-# Permissions evaluated in scripted ways
-
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
-
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
-# Document Events
-# ---------------
-# Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
-
-# Scheduled Tasks
-# ---------------
-
-# scheduler_events = {
-# 	"all": [
-# 		"ne_taskcompass.tasks.all"
-# 	],
-# 	"daily": [
-# 		"ne_taskcompass.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"ne_taskcompass.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"ne_taskcompass.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"ne_taskcompass.tasks.monthly"
-# 	],
-# }
-
-# Testing
-# -------
-
-# before_tests = "ne_taskcompass.install.before_tests"
-
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "ne_taskcompass.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "ne_taskcompass.task.get_dashboard_data"
-# }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-# Ignore links to specified DocTypes when deleting documents
-# -----------------------------------------------------------
-
-# ignore_links_on_delete = ["Communication", "ToDo"]
-
-# Request Events
-# ----------------
-# before_request = ["ne_taskcompass.utils.before_request"]
-# after_request = ["ne_taskcompass.utils.after_request"]
-
-# Job Events
-# ----------
-# before_job = ["ne_taskcompass.utils.before_job"]
-# after_job = ["ne_taskcompass.utils.after_job"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"ne_taskcompass.auth.validate"
-# ]
+scheduler_events = {
+	"hourly": [
+		"ne_taskcompass.notifications.expire_stale_checks",
+	],
+}

@@ -1,0 +1,358 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-08-26 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "doctor_name",
+  "status",
+  "person_type",
+  "person_type_other",
+  "academic_rank",
+  "assigned_to",
+  "column_break_id",
+  "specialty",
+  "department",
+  "designation",
+  "hospital",
+  "city",
+  "classification_section",
+  "person_type_source",
+  "person_type_confidence",
+  "classification_basis",
+  "column_break_class",
+  "hod_candidate",
+  "hod_confidence",
+  "hod_evidence",
+  "source_url",
+  "contact_section",
+  "phone",
+  "whatsapp",
+  "email",
+  "notes",
+  "column_break_contact",
+  "image",
+  "profile_bio",
+  "section_break_682a5",
+  "hospitals",
+  "competitor_section",
+  "uses_competitor",
+  "competitor_names",
+  "followup_note",
+  "meta_section",
+  "added_by",
+  "updated_by_user"
+ ],
+ "fields": [
+  {
+   "default": "TC-DR-.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "TC-DR-."
+  },
+  {
+   "fieldname": "doctor_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Doctor Name",
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nApproved\nRejected",
+   "reqd": 1
+  },
+  {
+   "default": "Unclassified",
+   "description": "Internal Unclassified is shown in the portal as Role not yet confirmed.",
+   "fieldname": "person_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Person Type",
+   "options": "HOD\nProfessor\nOT Incharge\nOther\nUnclassified",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.person_type=='Other'",
+   "fieldname": "person_type_other",
+   "fieldtype": "Data",
+   "label": "Other Person Type",
+   "mandatory_depends_on": "eval:doc.person_type=='Other'"
+  },
+  {
+   "fieldname": "academic_rank",
+   "fieldtype": "Select",
+   "label": "Academic Rank",
+   "options": "\nFull\nAssociate\nAssistant"
+  },
+  {
+   "fieldname": "column_break_id",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "specialty",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Specialty"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "hospital",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Primary Hospital",
+   "options": "TC Hospital"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "City"
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Assigned Sales Person",
+   "options": "Sales Person"
+  },
+  {
+   "fieldname": "classification_section",
+   "fieldtype": "Section Break",
+   "label": "Classification Evidence"
+  },
+  {
+   "default": "admin",
+   "fieldname": "person_type_source",
+   "fieldtype": "Select",
+   "label": "Person Type Source",
+   "options": "scraper\nadmin\nfield_rep\nne_import\nseed",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "person_type_confidence",
+   "fieldtype": "Float",
+   "label": "Type Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "classification_basis",
+   "fieldtype": "Small Text",
+   "label": "Classification Basis"
+  },
+  {
+   "fieldname": "column_break_class",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "hod_candidate",
+   "fieldtype": "Check",
+   "label": "HOD Candidate"
+  },
+  {
+   "default": "0",
+   "fieldname": "hod_confidence",
+   "fieldtype": "Float",
+   "label": "HOD Confidence",
+   "precision": "2"
+  },
+  {
+   "fieldname": "hod_evidence",
+   "fieldtype": "Small Text",
+   "label": "HOD Evidence"
+  },
+  {
+   "fieldname": "source_url",
+   "fieldtype": "Data",
+   "label": "Source URL"
+  },
+  {
+   "fieldname": "contact_section",
+   "fieldtype": "Section Break",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "whatsapp",
+   "fieldtype": "Data",
+   "label": "WhatsApp"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_contact",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Photo"
+  },
+  {
+   "fieldname": "profile_bio",
+   "fieldtype": "Text Editor",
+   "label": "Profile Bio"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "hospitals",
+   "fieldtype": "Table",
+   "label": "Hospitals",
+   "options": "TC Doctor Hospital"
+  },
+  {
+   "fieldname": "competitor_section",
+   "fieldtype": "Section Break",
+   "label": "Competitor (derived)"
+  },
+  {
+   "default": "0",
+   "fieldname": "uses_competitor",
+   "fieldtype": "Check",
+   "label": "Uses Competitor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "competitor_names",
+   "fieldtype": "Data",
+   "label": "Competitor Names",
+   "read_only": 1
+  },
+  {
+   "fieldname": "followup_note",
+   "fieldtype": "Small Text",
+   "label": "Follow Up Note"
+  },
+  {
+   "fieldname": "meta_section",
+   "fieldtype": "Section Break",
+   "label": "Audit"
+  },
+  {
+   "fieldname": "added_by",
+   "fieldtype": "Link",
+   "label": "Added By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "updated_by_user",
+   "fieldtype": "Link",
+   "label": "Updated By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_682a5",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "image_field": "image",
+ "links": [],
+ "modified": "2026-10-11 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Doctor",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Sales Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "TC Salesperson",
+   "write": 1
+  }
+ ],
+ "search_fields": "doctor_name,hospital,city,person_type,status",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "doctor_name",
+ "track_changes": 1
+}

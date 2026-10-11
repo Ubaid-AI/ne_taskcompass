@@ -1,0 +1,362 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-08-26 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "salesperson",
+  "status",
+  "doctor",
+  "hospital",
+  "product",
+  "visited_at",
+  "column_break_cycle",
+  "is_followup",
+  "visit_number",
+  "followup",
+  "followup_round",
+  "day_plan",
+  "day_plan_item",
+  "discussion_section",
+  "showed_brochure",
+  "did_demonstration",
+  "outcome",
+  "blocker",
+  "notes",
+  "next_action",
+  "usage_section",
+  "our_units",
+  "competitor_units",
+  "gps_section",
+  "latitude",
+  "longitude",
+  "checkin_section",
+  "checkin_time",
+  "checkin_latitude",
+  "checkin_longitude",
+  "column_break_checkout",
+  "checkout_time",
+  "checkout_latitude",
+  "checkout_longitude",
+  "images_section",
+  "images",
+  "cycle_key"
+ ],
+ "fields": [
+  {
+   "default": "TC-VST-.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "TC-VST-."
+  },
+  {
+   "fieldname": "salesperson",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Sales Person",
+   "options": "Sales Person",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nIn Progress\nDone\nMissed\nRescheduled"
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Doctor",
+   "options": "TC Doctor",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "hospital",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Hospital",
+   "options": "TC Hospital",
+   "read_only": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Product",
+   "options": "TC Product",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Now",
+   "fieldname": "visited_at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Visited At",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_cycle",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_followup",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Follow Up Visit"
+  },
+  {
+   "fieldname": "visit_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Visit Number"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "followup",
+   "fieldtype": "Link",
+   "label": "Follow Up",
+   "options": "TC Follow Up"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "followup_round",
+   "fieldtype": "Int",
+   "label": "Follow Up Round"
+  },
+  {
+   "fieldname": "day_plan",
+   "fieldtype": "Link",
+   "label": "Day Plan",
+   "options": "TC Day Plan",
+   "read_only": 1
+  },
+  {
+   "fieldname": "day_plan_item",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Day Plan Item"
+  },
+  {
+   "fieldname": "discussion_section",
+   "fieldtype": "Section Break",
+   "label": "Discussion"
+  },
+  {
+   "default": "0",
+   "fieldname": "showed_brochure",
+   "fieldtype": "Check",
+   "label": "Brochure Shown"
+  },
+  {
+   "default": "0",
+   "fieldname": "did_demonstration",
+   "fieldtype": "Check",
+   "label": "Demonstration Given"
+  },
+  {
+   "fieldname": "outcome",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Outcome",
+   "options": "\nRefused\nWill Buy\nSample Requested"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "blocker",
+   "fieldtype": "Select",
+   "label": "What Is Holding Them Back",
+   "options": "\nPrice\nHabit\nProcurement\nClinical concern\nCompetitor relationship\nNo obstacle"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "next_action",
+   "fieldtype": "Data",
+   "label": "Next Action"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "usage_section",
+   "fieldtype": "Section Break",
+   "label": "Usage This Month"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "our_units",
+   "fieldtype": "Int",
+   "label": "Our Units Used"
+  },
+  {
+   "depends_on": "is_followup",
+   "fieldname": "competitor_units",
+   "fieldtype": "Int",
+   "label": "Competitor Units"
+  },
+  {
+   "fieldname": "gps_section",
+   "fieldtype": "Section Break",
+   "label": "GPS"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Float",
+   "label": "Latitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Float",
+   "label": "Longitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "checkin_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Check-in / Check-out"
+  },
+  {
+   "fieldname": "checkin_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Check-in Time"
+  },
+  {
+   "fieldname": "checkin_latitude",
+   "fieldtype": "Float",
+   "label": "Check-in Latitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "checkin_longitude",
+   "fieldtype": "Float",
+   "label": "Check-in Longitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "column_break_checkout",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "checkout_time",
+   "fieldtype": "Datetime",
+   "label": "Check-out Time"
+  },
+  {
+   "fieldname": "checkout_latitude",
+   "fieldtype": "Float",
+   "label": "Check-out Latitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "checkout_longitude",
+   "fieldtype": "Float",
+   "label": "Check-out Longitude",
+   "precision": "6"
+  },
+  {
+   "fieldname": "images_section",
+   "fieldtype": "Section Break",
+   "label": "Images"
+  },
+  {
+   "fieldname": "images",
+   "fieldtype": "Table",
+   "label": "Images",
+   "options": "TC Visit Image",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cycle_key",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Cycle Key",
+   "read_only": 1,
+   "unique": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-09-01 01:04:42.592622",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Visit",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Sales Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "TC Salesperson",
+   "write": 1
+  }
+ ],
+ "sort_field": "visited_at",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "doctor",
+ "track_changes": 1
+}

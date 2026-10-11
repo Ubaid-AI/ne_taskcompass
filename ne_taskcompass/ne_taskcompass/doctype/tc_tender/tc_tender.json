@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-08-26 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "title",
+  "hospital",
+  "champion_doctor",
+  "lead",
+  "column_break_stage",
+  "stage",
+  "submission_date",
+  "po_number",
+  "po_date",
+  "supporting_document",
+  "value",
+  "notes",
+  "items"
+ ],
+ "fields": [
+  {
+   "default": "TC-TND-.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "TC-TND-."
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hospital",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Hospital",
+   "options": "TC Hospital"
+  },
+  {
+   "fieldname": "champion_doctor",
+   "fieldtype": "Link",
+   "label": "Champion Doctor",
+   "options": "TC Doctor"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Lead Sales Person",
+   "options": "Sales Person"
+  },
+  {
+   "fieldname": "column_break_stage",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Identified",
+   "fieldname": "stage",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Stage",
+   "options": "Identified\nSubmitted\nWon\nLost\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "submission_date",
+   "fieldtype": "Date",
+   "label": "Submission Date"
+  },
+  {
+   "fieldname": "po_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "PO Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "po_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "PO Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supporting_document",
+   "fieldtype": "Attach",
+   "label": "Supporting Document"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Value",
+   "options": "PKR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "TC Tender Item"
+  }
+ ],
+ "links": [],
+ "modified": "2026-10-11 17:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Tender",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "TC Sales Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "TC Salesperson",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "title",
+ "track_changes": 1
+}

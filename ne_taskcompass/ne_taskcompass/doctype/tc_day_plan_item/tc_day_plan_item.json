@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "creation": "2026-08-26 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "doctor",
+  "hospital",
+  "product",
+  "visit_time",
+  "status",
+  "visit",
+  "assigned_by",
+  "sort_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Doctor",
+   "options": "TC Doctor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hospital",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Hospital",
+   "options": "TC Hospital",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product",
+   "options": "TC Product",
+   "reqd": 1
+  },
+  {
+   "description": "HH:MM from the doctor's OPD schedule at this hospital",
+   "fieldname": "visit_time",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Visit Time"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nIn Progress\nDone\nMissed\nRescheduled"
+  },
+  {
+   "fieldname": "visit",
+   "fieldtype": "Link",
+   "label": "Visit",
+   "options": "TC Visit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "assigned_by",
+   "fieldtype": "Link",
+   "label": "Assigned By",
+   "options": "User"
+  },
+  {
+   "default": "0",
+   "fieldname": "sort_order",
+   "fieldtype": "Int",
+   "label": "Sort Order"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-01 00:50:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Day Plan Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "sort_order",
+ "sort_order": "ASC"
+}

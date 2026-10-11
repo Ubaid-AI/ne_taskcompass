@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "creation": "2026-08-26 22:40:11.337388",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "scoring_section",
+  "score_floor",
+  "weeks_per_month",
+  "column_break_rules",
+  "warn_additional_sample",
+  "gps_retention_days",
+  "gps_check_meters",
+  "tracker_section",
+  "tracker_start_time",
+  "tracker_end_time",
+  "location_interval"
+ ],
+ "fields": [
+  {
+   "fieldname": "scoring_section",
+   "fieldtype": "Section Break",
+   "label": "Scoring and Rules"
+  },
+  {
+   "default": "30",
+   "description": "Provisional participation floor. Client has not signed off (PRD D10).",
+   "fieldname": "score_floor",
+   "fieldtype": "Int",
+   "label": "Score Floor"
+  },
+  {
+   "default": "4",
+   "description": "Weekly target is monthly target divided by this, rounded up.",
+   "fieldname": "weeks_per_month",
+   "fieldtype": "Int",
+   "label": "Weeks Per Month"
+  },
+  {
+   "fieldname": "column_break_rules",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "description": "Warn the admin at sample approval if the doctor already has a sample of another product.",
+   "fieldname": "warn_additional_sample",
+   "fieldtype": "Check",
+   "label": "Warn On Additional Product Sample"
+  },
+  {
+   "default": "90",
+   "fieldname": "gps_retention_days",
+   "fieldtype": "Int",
+   "label": "GPS Retention Days"
+  },
+  {
+   "default": "200",
+   "description": "A visit is accepted only if the phone GPS is within this many metres of the hospital pin.",
+   "fieldname": "gps_check_meters",
+   "fieldtype": "Int",
+   "label": "Hospital check-in radius (metres)"
+  },
+  {
+   "fieldname": "tracker_section",
+   "fieldtype": "Section Break",
+   "label": "Sales Person Tracker"
+  },
+  {
+   "default": "08:00:00",
+   "description": "The mobile app starts posting salesperson GPS at this time of day.",
+   "fieldname": "tracker_start_time",
+   "fieldtype": "Time",
+   "label": "Tracker Start Time"
+  },
+  {
+   "default": "18:00:00",
+   "description": "The mobile app stops posting salesperson GPS at this time of day.",
+   "fieldname": "tracker_end_time",
+   "fieldtype": "Time",
+   "label": "Tracker End Time"
+  },
+  {
+   "default": "00:15:00",
+   "description": "How often the mobile app should post location (hours : minutes : seconds).",
+   "fieldname": "location_interval",
+   "fieldtype": "Time",
+   "label": "Location Interval"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-31 21:28:10.952360",
+ "modified_by": "Administrator",
+ "module": "Ne Taskcompass",
+ "name": "TC Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "TC Super Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "TC Management",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "TC Sales Manager"
+  },
+  {
+   "read": 1,
+   "role": "TC Salesperson"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
